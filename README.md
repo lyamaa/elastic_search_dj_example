@@ -1,6 +1,7 @@
 # elastic_search_dj_example
 
 Examples on Django + haystack + elastic search
+<<<<<<< HEAD
 
 Requirements:
 
@@ -42,3 +43,8 @@ project directory should look like:
 ├── **init**.py
 
 python manage.py rebuild_index
+||||||| 7f71ed9
+=======
+
+![django_elastic](https://cdn-media-1.freecodecamp.org/images/1*ojvTsI-Asv1IIjdm61RzKw.jpeg)
+>>>>>>> 86f6cd0858194a7012c68272496fec8f5458f08f
