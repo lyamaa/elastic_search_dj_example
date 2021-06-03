@@ -10,12 +10,12 @@ from .search_indexes import (
 
 class AggregateSerializer(HaystackSerializer):
     class Meta:
-        index_classes = [HotelIndex, HotelSpecIndex, HotelImageIndex, HotelAddressIndex]
+        index_classes = [HotelIndex]
         fields = [
             "name",
             "hotel",
-            "config_choice",
-            "value",
+            "hotel_type",
+            "slug",
             "image_urls",
             "caption",
             "address",

@@ -1,7 +1,10 @@
 from commons.models import Address, ConfigChoice
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django_q.tasks import async_task
+
 from autoslug import AutoSlugField
 
 
@@ -111,3 +114,10 @@ class HotelAddress(models.Model):
 
     def __str__(self):
         return f"{self.hotel.name} {self.address.city}"
+
+
+# hook up the post save handler
+@receiver(post_save, sender=Hotel)
+def document_changed(sender, instance, **kwargs):
+    async_task("tasks.index_object", sender, instance, save=False)
+    # turn off result saving to not flood your database
