@@ -1,10 +1,10 @@
 from commons.models import Address, ConfigChoice
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from django.db.models.signals import post_save
+from haystack import signals
 from django.dispatch import receiver
 from django_q.tasks import async_task
-
+from .tasks import handle_save, handle_delete
 from autoslug import AutoSlugField
 
 
@@ -116,8 +116,20 @@ class HotelAddress(models.Model):
         return f"{self.hotel.name} {self.address.city}"
 
 
-# hook up the post save handler
-@receiver(post_save, sender=Hotel)
-def document_changed(sender, instance, **kwargs):
-    async_task("tasks.index_object", sender, instance, save=False)
-    # turn off result saving to not flood your database
+# # hook up the post save handler
+# @receiver(signals.BaseSignalProcessor)
+# def document_changed(self, sender, instance, **kwargs):
+#     async_task(models.signals.post_save.connect(self.handle_save, sender=Hotel))
+#     # turn off result saving to not flood your database
+class HotelOnlySignalProcessor(signals.BaseSignalProcessor):
+    def setup(self):
+        # Listen only to the ``Hotel`` model.
+        async_task(models.signals.post_save.connect(self.handle_save, sender=Hotel))
+        async_task(models.signals.post_delete.connect(self.handle_delete, sender=Hotel))
+
+    # def teardown(self):
+    #     # Disconnect only for the ``Hotel`` model.
+    #     async_task(models.signals.post_save.disconnect(handle_save, sender=Hotel))
+    #     async_task(
+    #         models.signals.post_delete.disconnect(self.handle_delete, sender=Hotel)
+    #     )
