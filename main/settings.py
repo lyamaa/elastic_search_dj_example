@@ -136,7 +136,8 @@ HAYSTACK_SIGNAL_PROCESSOR = "searches.models.HotelOnlySignalProcessor"
 # settings.py example
 Q_CLUSTER = {
     "name": "myproject",
-    "workers": 8,
+    "workers": 4,
+    "retry": 100,
     "recycle": 500,
     "timeout": 60,
     "compress": True,
