@@ -5,7 +5,7 @@ Examples on Django + haystack + elastic search
 Requirements:
 
 Django
-Elastic Search (required version 6)
+Elastic Search (required version 7.x.x)
 Drf Haystack
 
 ```
@@ -20,6 +20,12 @@ $ poetry add elasticsearch==^5.0
 $ django-admin.py startproject main
 $ python manage.py startapp searches
 $ python manage.py startapp commons
+```
+# OR
+
+clone the repo and
+```
+$ poetry install
 ```
 
 project directory should look like:
