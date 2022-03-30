@@ -119,7 +119,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 HAYSTACK_CONNECTIONS = {
     "default": {
-        "ENGINE": "haystack.backends.elasticsearch5_backend.Elasticsearch5SearchEngine",
+        'ENGINE': 'haystack.backends.elasticsearch7_backend.Elasticsearch7SearchEngine',
         "URL": "http://127.0.0.1:9200/",
         "INDEX_NAME": "haystack",
     },
