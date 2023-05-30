@@ -13,21 +13,8 @@ Project Setup
 $ mkdir dj_elastic && cd dj_elastic
 $ python3 -m venv env
 $ source env/bin/activate
-$ poetry init
-$ poetry add django djangorestframework django-autoslug black isort
-$ poetry add django-haystack drf-haystack
-$ poetry add elasticsearch==^5.0
-$ django-admin.py startproject main
-$ python manage.py startapp searches
-$ python manage.py startapp commons
-```
-# OR
-
-clone the repo and
-```
 $ poetry install
 ```
-
 project directory should look like:
 
 ```
